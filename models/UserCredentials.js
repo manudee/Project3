@@ -2,34 +2,31 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var articleSchema = new Schema({
+var UserSchema = new Schema({
 
-    title: {
-        type: String,
-        required: true
-    },
 
-    date: {
-        type: Date,
-        required: true
-    },
-
-    url : {
-        type: String,
+    username: {
+        type: Srting,
         required: true,
         unique: true
+    },
+
+    password : {
+        type: String,
+        required: true
 
     },
 
-    saved: {
-        type: Boolean,
-        default: false
+    role: {
+        type: String,
+        required: true,
+        default: 'U'//U for user and M for Manager
     }
 
 
 });
 
 
-var article = mongoose.model("article",articleSchema);
+var user = mongoose.model("user",UserSchema);
 
-module.exports = article;
+module.exports = user;

@@ -2,34 +2,52 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var articleSchema = new Schema({
+var requestSchema = new Schema({
 
-    title: {
+    equipmentID: {
         type: String,
         required: true
     },
 
-    date: {
-        type: Date,
+    qty: {
+        type: Number,
         required: true
     },
 
-    url : {
+    justification: {
         type: String,
-        required: true,
-        unique: true
+        required: true
 
     },
 
-    saved: {
-        type: Boolean,
-        default: false
+    status: {
+        type: String,
+        required: true
+
+
+    },
+
+
+    user: [{
+
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+
     }
+    ],
 
+
+    assetID: [{
+
+        type: Schema.Types.ObjectId,
+        ref: 'equipment'
+
+
+    }]
 
 });
 
 
-var article = mongoose.model("article",articleSchema);
+var request = mongoose.model("request", requestSchema);
 
-module.exports = article;
+module.exports = request;

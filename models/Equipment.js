@@ -2,34 +2,27 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var articleSchema = new Schema({
+var EquipmentSchema = new Schema({
 
-    title: {
+    equipmentDesc: {
         type: String,
         required: true
     },
 
-    date: {
-        type: Date,
+    brand: {
+        type: String,
         required: true
     },
 
-    url : {
-        type: String,
-        required: true,
-        unique: true
+    qty : {
+        type: Number,
+        required: true
 
-    },
-
-    saved: {
-        type: Boolean,
-        default: false
     }
-
 
 });
 
 
-var article = mongoose.model("article",articleSchema);
+var equipment = mongoose.model("equipment",EquipmentSchema);
 
-module.exports = article;
+module.exports = equipment;

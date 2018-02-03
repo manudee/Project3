@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 //const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
-var db = require('./models/article.js');
+var db = require('./models');
 
 var request = require('request');
 
@@ -20,7 +20,7 @@ app.use(express.static("client/build"));
 mongoose.Promise = global.Promise;
 // Connect to the Mongo DB
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/nyreact",
+  process.env.MONGODB_URI || "mongodb://localhost/project3",
   {
     useMongoClient: true
   }
