@@ -29,10 +29,9 @@ class UserTable extends Component {
 
     }, {
       Header: 'equipment',
-      accessor: 'equipment',
-      Cell: props => <span className='string'>{props.value}</span> // Custom cell components!
+      accessor: 'equipment'
     }, {
-      Header: props => <span>Description</span>, // Custom header components!
+      Header: 'Description',
       accessor: 'Description'
     },
     {
@@ -41,10 +40,11 @@ class UserTable extends Component {
       Cell: () => (<SaveBtn value='Return'/>)
     }]
 
+    
     return (
       <div>
       <div>
-        <SaveBtn value='createRequest'/>
+        <SaveBtn value='Create Request'/>
        </div> 
         <ReactTable
           data={data}
