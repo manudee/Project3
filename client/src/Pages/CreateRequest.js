@@ -15,7 +15,7 @@ class CreateRequest extends Component{
         equipment:"",
         description:"",
         amount:"",
-        checkout:"",
+        //checkout:"",
         justification:""
     }    
 
@@ -27,7 +27,7 @@ class CreateRequest extends Component{
        };
 
      setrequestType(event){
-           console.log(event.target.value)
+           //console.log(event.target.value)
            this.setState({checkout: event.target.value});
             return event.target.value;
        }
@@ -38,13 +38,13 @@ class CreateRequest extends Component{
         var equipment=this.state.equipment;
         var description=this.state.description;
         var amount= this.state.amount;
-        var checkout=this.state.checkout;
+       // var checkout=this.state.checkout;
         var justification= this.state.justification;
 
         var requestInfo = {}
         requestInfo.equipment = equipment;
         requestInfo.description = description;
-        requestInfo.checkout = checkout;
+        //requestInfo.checkout = checkout;
         requestInfo.amount = amount;
         requestInfo.justification = justification;
 
@@ -62,7 +62,7 @@ class CreateRequest extends Component{
                 <div onChange={this.setrequestType.bind(this)}>
                 <Input type ="radio" value="checkout" name="requestType"/>Checkout
                 <Input type ="radio" value="return" name="requestType"/>Return
-                </div> 
+                </div>
                 <Title>Description</Title>
                 <Input name="description" placeholder="Description" value={this.state.description} onChange={this.handleInputChange}/>
                 <Title>Amount</Title>
