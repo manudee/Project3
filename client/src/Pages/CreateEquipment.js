@@ -11,7 +11,7 @@ class CreateEquipment extends Component{
     state={
         equipment:"",
         description:"",
-        amount:""
+        quantity:""
     }    
 
     handleInputChange = event => {
