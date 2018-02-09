@@ -4,6 +4,26 @@ import "react-table/react-table.css";
 import {SaveBtn} from "../components/Button/SaveBtn.js";
 
 class EquipmentTable extends Component {
+
+state = {
+
+  data : [{
+    equipmentId: "",
+    equimentName: "",
+    quantity: 10
+  }]
+
+}
+
+
+handleUpdate = event => {
+  event.preventDefault();
+  
+
+}
+
+
+
   render() {
     const data = [{
       equipmentId: '101010',

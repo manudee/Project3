@@ -5,6 +5,7 @@ import CreateRequest from './Pages/CreateRequest';
 import UserTable from './Pages/UserTable';
 import EquipmentTable from './Pages/EquipmentTable';
 import ManagerTable from './Pages/ManagerTable';
+import UserList from './Pages/UserList.js';
 import CreateEquipment from './Pages/CreateEquipment';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CreateUser from './Pages/CreateUser';
@@ -13,6 +14,7 @@ import CreateUser from './Pages/CreateUser';
 
 const App = () =>
 
+
   <Router>
       <div className="App">
       <Jumbotron/>
@@ -20,11 +22,12 @@ const App = () =>
         <Route exact path="/" component={LoginPage} />
         <Route exact path="/createrequest" component={CreateRequest} />
         <Route path="/user" exact component={UserTable} />
+        <Route path="/userlist" exact component={UserList} />   
+        <Route path="/equipments" exact component={EquipmentTable} />
         <Route path="/createuser" exact component={CreateUser} />
         <Route path="/createequipment" exact component={CreateEquipment} />
         <Route path="/equipment" exact component={EquipmentTable} />
         <Route path="/manager" exact component={ManagerTable} />
-
       </Switch>
       </div>
   </Router>    
