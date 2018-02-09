@@ -20,10 +20,7 @@ app.use(express.static("client/build"));
 mongoose.Promise = global.Promise;
 // Connect to the Mongo DB
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/project3",
-  {
-    useMongoClient: true
-  }
+  process.env.MONGODB_URI || "mongodb://localhost/project3"
 );
 
 // Start the API server
