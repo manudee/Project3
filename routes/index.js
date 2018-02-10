@@ -12,5 +12,8 @@ router.use("/api/createequipment", equipRoutes);
 router.use("/api/createuser", userRoutes);
 
 
+router.use('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build/index.html'));
+});
 
 module.exports = router;
