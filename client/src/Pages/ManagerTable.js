@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import ReactTable from 'react-table';
 import "react-table/react-table.css";
 import { SaveBtn } from "../components/Button/SaveBtn.js";
+import Chat from "../components/Chat/Chat.js";
 
 class ManagerTable extends Component {
+
     render() {
         const data = [{
             Reqid: '101010',
@@ -83,7 +85,12 @@ class ManagerTable extends Component {
                     data={data}
                     columns={columns}
                     defaultPageSize={10}
-                    className="-striped -highlight text-center" /></div>)
+                    className="-striped -highlight text-center" />
+                {/*Chat element from Socket io*/}
+                <div>
+                    <Chat/>
+                </div>
+            </div>)
     }
 }
 
