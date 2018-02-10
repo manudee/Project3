@@ -2,9 +2,21 @@ import React, { Component } from 'react';
 import ReactTable from 'react-table';
 import "react-table/react-table.css";
 import { SaveBtn } from "../components/Button/SaveBtn.js";
-
+import API from "../utils/API";
 
 class UserList extends Component {
+
+    componentDidMount() {
+        this.loadEquipments();
+      }
+    
+    
+    loadEquipments = () => {
+      API.getUsers()
+      .then(res=>console.log(res.data))
+      .catch(err=>console.log(err))
+    }
+
 
     render() {
 

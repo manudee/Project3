@@ -3,13 +3,14 @@ import {Input} from '../components/Form/Input.js';
 import {FormButton} from '../components/Form/FormButton.js';
 import Title from '../components/Title/Title.js';
 import Container from '../components/Container/Container';
+import API from '../utils/API';
 
 class CreateUser extends Component{
 
     state={
         username:"",
         password:"",
-        Role:""
+        role:""
     }    
 
     handleInputChange = event => {
@@ -34,6 +35,14 @@ class CreateUser extends Component{
       
 
         console.log(userInfo);
+
+        API.createUser(userInfo)
+        .then(res => this.setState(this.setState({
+            username: "", 
+            password: "",
+            Role: ""
+        })))
+        .catch(err => console.log("error is " + err));
 
        }
 
