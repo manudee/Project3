@@ -1,35 +1,37 @@
 import React, { Component } from 'react';
 import ReactTable from 'react-table';
 import "react-table/react-table.css";
-import {SaveBtn} from "../components/Button/SaveBtn.js";
+import { SaveBtn } from "../components/Button/SaveBtn.js";
 import API from "../utils/API";
+import { Col, Row, Container } from '../components/Grid'
+import { List, ListItem } from "../components/List";
+import { Link } from "react-router-dom";
+import {Redirect} from 'react-router-dom';
 
 class EquipmentTable extends Component {
+  state = {
+
+    equipments: [],
+    isredirect: false
+  }
+
 
   componentDidMount() {
     this.loadEquipments();
   }
 
 
-loadEquipments = () => {
-  API.getEquipment()
-  .then(res=>console.log(res.data))
-  .catch(err=>console.log(err))
-}
-
-
-
-
-
-  state = {
-
-    data: [{
-      equipmentDesc: "",
-      brand: "",
-      quantity: ""
-    }]
-
+  loadEquipments = () => {
+    API.getEquipment()
+      // .then(res=>console.log(res.data))
+      .then(response => this.setState({ equipments: response.data }))
+      .catch(err => console.log(err))
   }
+
+
+
+
+
 
 
   handleUpdate = event => {
@@ -38,7 +40,11 @@ loadEquipments = () => {
 
     var equipmentInfo = {};
 
-    equipmentInfo.equipmentDesc = this.state
+    equipmentInfo.equipmentDesc = this.state.equipmentDesc;
+    equipmentInfo.brand = this.state.brand;
+    equipmentInfo.quantity = this.state.quantity;
+
+
 
 
   }
@@ -50,6 +56,9 @@ loadEquipments = () => {
 
     var equipmentInfo = {};
 
+    equipmentInfo.equipmentDesc = this.state.equipmentDesc;
+    equipmentInfo.brand = this.state.brand;
+    equipmentInfo.quantity = this.state.quantity;
 
 
 
@@ -58,66 +67,86 @@ loadEquipments = () => {
 
   handleCreateEquipment = event => {
     event.preventDefault();
-    console.log("In handleCreate Equipment")
+    console.log("In handleCreate Equipment");
 
+    this.setState({ isredirect: true });
   }
 
 
 
   render() {
-    const data = [{
-      equipmentDesc: '101010',
-      brand: 'Laptop',
-      quantity: 10
-    },
-    {
-      equipmentDesc: '202020',
-      brand: 'Mouse',
-      quantity: 30
-    }, {
-      equipmentDesc: '303030',
-      brand: 'keyboard',
-      quantity: 30
-    }
-
-    ]
-
-    const columns = [{
-      Header: 'Equipment Description',
-      accessor: 'equipmentDesc'
-
-
-    }, {
-      Header: 'Brand',
-      accessor: 'brand',
-      // Custom cell components!
-    }, {
-      Header: 'Quantity', // Custom header components!
-      accessor: 'quantity'
-    },
-    {
-      Header: 'Update',
-      accessor: 'updateAction',
-      Cell: () => (<SaveBtn onClick={this.handleUpdate} value='Update' />)
-    },
-    {
-      Header: 'Delete',
-      accessor: 'deleteAction',
-      Cell: () => (<SaveBtn onClick={this.handleDelete} value='Delete' />)
-    }
-
-    ]
-
     return (
       <div>
         <div>
           <SaveBtn onClick={this.handleCreateEquipment} value='Create Equipment' />
+           {this.state.isredirect? (<Redirect to={{pathname:"/createequipment", state:this.state}}/>) : null}
         </div>
-        <ReactTable
-          data={data}
-          columns={columns}
-          defaultPageSize={10}
-          className="-striped -highlight text-center" /></div>)
+
+
+
+        <Container fluid className='card'>
+
+          <Row className='card-header'>
+            <Col size="md-2">
+              <h6>Request Id </h6>
+            </Col>
+            <Col size="md-2">
+              <h6>Equipment</h6>
+            </Col>
+            <Col size="md-2">
+              <h6>Description</h6>
+            </Col>
+            <Col size="md-2">
+              <h6>Quantity</h6>
+            </Col>
+            <Col size="md-2">
+              <h6>Justification</h6>
+            </Col>
+          </Row>
+
+          {this.state.equipments.length ? (
+            <List>
+              {this.state.equipments.map(equipment => (
+                <ListItem key={equipment._id}>
+
+                  <Row className="card-block">
+                    <Col size="md-2">
+
+                      <Link to={"/api/user" + equipment._id}>
+                        <strong>
+                          {equipment._id}
+                        </strong>
+                      </Link>
+
+                    </Col>
+                    <Col size="md-2">
+                      {equipment.equipmentDesc}
+                    </Col>
+                    <Col size="md-2">
+                      {equipment.brand}
+                    </Col>
+                    <Col size="md-2">
+                      {equipment.quantity}
+                    </Col>
+                    <Col size="md-2">
+                      <SaveBtn onClick={this.handleUpdate} value='Update Equipment' />
+                    </Col>
+                    <Col size="md-2">
+                      <SaveBtn onClick={this.handleDelete} value='Delete Equipment' />
+                    </Col>
+                  </Row>
+
+                </ListItem>
+              ))}
+            </List>
+          ) : (
+              <h3>No Equipments added yet</h3>
+            )}
+
+
+        </Container>
+      </div>
+    )
   }
 }
 

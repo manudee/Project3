@@ -6,6 +6,8 @@ import API from '../utils/API';
 import { Col, Row, Container } from '../components/Grid'
 import { List, ListItem } from "../components/List";
 import Chat from "../components/Chat/Chat.js";
+import {Redirect} from 'react-router-dom'; 
+
 
 
 
@@ -14,7 +16,8 @@ class UserTable extends Component {
 
   state = {
 
-    requests: []
+    requests: [],
+    isredirect:false
   }
 
   componentDidMount() {
@@ -29,11 +32,13 @@ class UserTable extends Component {
     API.getRequests()
       .then(res => this.setState({ requests: res.data }))
       .catch(err => console.log(err));
-    // .then(res => console.log(res));
 
   }
 
-
+  handleRedirect= event =>{
+    event.preventDefault();
+    this.setState({isredirect:true});
+  }
 
 
   render() {
@@ -42,39 +47,11 @@ class UserTable extends Component {
     return (
       <div>
         <div>
-          <SaveBtn value='Create Request' />
+          <SaveBtn onClick={this.handleRedirect} value='Create Request' />
+          {this.state.isredirect? (<Redirect to={{pathname:"/createrequest", state:this.state}}/>) : null}
         </div>
 
-        <Container fluid className='card'
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        >
+        <Container fluid className='card'>
           
           <Row className='card-header'>
             <Col size="md-2">
@@ -99,23 +76,23 @@ class UserTable extends Component {
               {this.state.requests.map(requests => (
                 <ListItem key={requests._id}>
 
-                    <Row className="card-block">
-                      <Col size="md-2">
-                        <a href={"/api/user" + requests._id}>{requests._id}</a>
-                      </Col>
-                      <Col size="md-2">
-                        {requests.equipment}
-                      </Col>
-                      <Col size="md-2">
-                        {requests.description}
-                      </Col>
-                      <Col size="md-2">
-                        {requests.quantity}
-                      </Col>
-                      <Col size="md-2">
-                        {requests.justification}
-                      </Col>
-                    </Row>
+                  <Row className="card-block">
+                    <Col size="md-2">
+                      <a href={"/api/user" + requests._id}>{requests._id}</a>
+                    </Col>
+                    <Col size="md-2">
+                      {requests.equipment}
+                    </Col>
+                    <Col size="md-2">
+                      {requests.description}
+                    </Col>
+                    <Col size="md-2">
+                      {requests.quantity}
+                    </Col>
+                    <Col size="md-2">
+                      {requests.justification}
+                    </Col>
+                  </Row>
 
                 </ListItem>
               ))}
