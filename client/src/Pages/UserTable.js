@@ -5,6 +5,7 @@ import { SaveBtn } from "../components/Button/SaveBtn.js";
 import API from '../utils/API';
 import { Col, Row, Container } from '../components/Grid'
 import { List, ListItem } from "../components/List";
+import Chat from "../components/Chat/Chat.js";
 import {Redirect} from 'react-router-dom'; 
 
 
@@ -102,6 +103,18 @@ class UserTable extends Component {
 
 
         </Container>
+
+
+        {/* <ReactTable
+                data={data}
+                columns={columns}
+                defaultPageSize={10}
+                className="-striped -highlight text-center" /> */}
+
+      {/*Chat element from Socket io*/}
+        <div>
+            <Chat/>
+        </div>
 
       </div>)
   }

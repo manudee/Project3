@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactTable from 'react-table';
 import "react-table/react-table.css";
 import { SaveBtn } from "../components/Button/SaveBtn.js";
+import Chat from "../components/Chat/Chat.js";
 import { Col, Row, Container } from '../components/Grid'
 import { List, ListItem } from "../components/List";
 import API from '../utils/API';
@@ -74,6 +75,7 @@ class ManagerTable extends Component {
                     <SaveBtn onClick={this.handleRedirectAllEquipments} value='All Equipments' />
                     {this.state.isredirectAllEquipments ? (<Redirect to={{ pathname: "/equipments", state: this.state }} />) : null}
                 </div>
+
                 <Container fluid className='card'>
 
                     <Row className='card-header'>
@@ -132,8 +134,13 @@ class ManagerTable extends Component {
 
 
                 </Container>
+         {/*Chat element from Socket io*/}
+                <div>
+                    <Chat/>
+                </div>
             </div>
         )
+
     }
 }
 
