@@ -7,7 +7,7 @@ import { TextArea } from './../components/Form/TextArea';
 import Container from '../components/Container/Container';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import API from '../utils/API';
-
+import {Redirect} from 'react-router-dom';
 
 class CreateRequest extends Component {
 
@@ -15,7 +15,8 @@ class CreateRequest extends Component {
         equipment: "",
         description: "",
         quantity: "",
-        justification: ""
+        justification: "",
+        isredirect: false
     }
 
     handleInputChange = event => {
@@ -51,6 +52,7 @@ class CreateRequest extends Component {
                 quantity: "",
                 justification: ""
             })))
+            .then(() => this.setState({isredirect:true}))
             .catch(err => console.log("error is " + err));
 
 
@@ -82,7 +84,9 @@ class CreateRequest extends Component {
                         <Title>Justification</Title>
                         <TextArea name="justification" placeholder="Justification" value={this.state.justification} onChange={this.handleInputChange}></TextArea>
                         <FormButton onClick={this.handleFormSubmit}>Submit Request</FormButton>
+
                     </form>
+                    {this.state.isredirect? (<Redirect to={{pathname:"/user", state:this.state}}/>) : null}
                 </Container>
             </div>
         )
