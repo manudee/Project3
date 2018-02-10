@@ -14,7 +14,7 @@ var EquipmentSchema = new Schema({
         required: true
     },
 
-    qty : {
+    quantity : {
         type: Number,
         required: true
 

@@ -28,6 +28,11 @@ export default {
         });
     },
 
+    getRequests: function () {
+        return axios.get("/api/createRequest");
+    }
+
+
     getEquipment:function(){
         console.log("I am in API")
         return axios.get('/api/createequipment')
