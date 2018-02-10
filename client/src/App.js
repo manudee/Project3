@@ -26,7 +26,6 @@ const App = () =>
         <Route path="/equipments" exact component={EquipmentTable} />
         <Route path="/createuser" exact component={CreateUser} />
         <Route path="/createequipment" exact component={CreateEquipment} />
-        <Route path="/equipment" exact component={EquipmentTable} />
         <Route path="/manager" exact component={ManagerTable} />
       </Switch>
       </div>
