@@ -5,6 +5,7 @@ import { SaveBtn } from "../components/Button/SaveBtn.js";
 import API from '../utils/API';
 import { Col, Row, Container } from '../components/Grid'
 import { List, ListItem } from "../components/List";
+import {Redirect} from 'react-router-dom'; 
 
 
 
@@ -14,7 +15,8 @@ class UserTable extends Component {
 
   state = {
 
-    requests: []
+    requests: [],
+    isredirect:false
   }
 
   componentDidMount() {
@@ -32,7 +34,10 @@ class UserTable extends Component {
 
   }
 
-
+  handleRedirect= event =>{
+    event.preventDefault();
+    this.setState({isredirect:true});
+  }
 
 
   render() {
@@ -41,11 +46,12 @@ class UserTable extends Component {
     return (
       <div>
         <div>
-          <SaveBtn value='Create Request' />
+          <SaveBtn onClick={this.handleRedirect} value='Create Request' />
+          {this.state.isredirect? (<Redirect to={{pathname:"/createrequest", state:this.state}}/>) : null}
         </div>
 
         <Container fluid className='card'>
-
+          
           <Row className='card-header'>
             <Col size="md-2">
               <h6>Request Id </h6>
@@ -96,8 +102,6 @@ class UserTable extends Component {
 
 
         </Container>
-
-
 
       </div>)
   }
