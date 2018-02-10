@@ -4,13 +4,15 @@ import {FormButton} from '../components/Form/FormButton.js';
 import Title from '../components/Title/Title.js';
 import Container from '../components/Container/Container';
 import API from '../utils/API';
+import {Redirect} from 'react-router-dom';
 
 class CreateUser extends Component{
 
     state={
         username:"",
         password:"",
-        role:""
+        role:"",
+        isredirect: false
     }    
 
     handleInputChange = event => {
@@ -42,6 +44,7 @@ class CreateUser extends Component{
             password: "",
             Role: ""
         })))
+        .then(() => this.setState({isredirect:true}))
         .catch(err => console.log("error is " + err));
 
        }
@@ -63,6 +66,7 @@ class CreateUser extends Component{
                 <Input name="role" placeholder="Role" value={this.state.role} onChange={this.handleInputChange}/>
                 <FormButton onClick={this.handleFormSubmit}>Submit Request</FormButton>
                     </form>
+                    {this.state.isredirect? (<Redirect to={{pathname:"/userlist", state:this.state}}/>) : null}
                 </Container>
             </div>        
         )}

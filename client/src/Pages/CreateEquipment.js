@@ -4,7 +4,7 @@ import {FormButton} from '../components/Form/FormButton.js';
 import Title from '../components/Title/Title.js';
 import Container from '../components/Container/Container';
 import API from '../utils/API';
-
+import {Redirect} from 'react-router-dom';
 
 
 class CreateEquipment extends Component{
@@ -12,7 +12,8 @@ class CreateEquipment extends Component{
     state={
         equipment:"",
         description:"",
-        quantity:""
+        quantity:"",
+        isredirect: false
     }    
 
     handleInputChange = event => {
@@ -45,6 +46,7 @@ class CreateEquipment extends Component{
             description: "",
             quantity: ""
         })))
+        .then(() => this.setState({isredirect:true}))
         .catch(err => console.log("error is " + err));
 
        }
@@ -66,6 +68,7 @@ class CreateEquipment extends Component{
                 <Input name="quantity" placeholder="Quantity" value={this.state.quantity} onChange={this.handleInputChange}/>
                 <FormButton onClick={this.handleFormSubmit}>Submit Request</FormButton>
                     </form>
+                    {this.state.isredirect? (<Redirect to={{pathname:"/equipments", state:this.state}}/>) : null}
                 </Container>
             </div>        
         )}
