@@ -45,7 +45,36 @@ class UserTable extends Component {
           <SaveBtn value='Create Request' />
         </div>
 
-        <Container fluid className='card'>
+        <Container fluid className='card'
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        >
           
           <Row className='card-header'>
             <Col size="md-2">
