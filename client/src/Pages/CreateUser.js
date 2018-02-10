@@ -57,14 +57,14 @@ class CreateUser extends Component{
         return(
             <div>
                 <Container>
-                <form>
-                <Title>UserName</Title>
-                <Input name="username" placeholder="UserName" value={this.state.username} onChange={this.handleInputChange}/>
-                <Title>Password</Title>
-                <Input name="password" placeholder="Password" value={this.state.password} onChange={this.handleInputChange}/>
-                <Title>Role</Title>
-                <Input name="role" placeholder="Role" value={this.state.role} onChange={this.handleInputChange}/>
-                <FormButton onClick={this.handleFormSubmit}>Submit Request</FormButton>
+                    <form>
+                        <Title>UserName</Title>
+                        <Input name="username" placeholder="UserName" value={this.state.username} onChange={this.handleInputChange}/>
+                        <Title>Password</Title>
+                        <Input name="password" placeholder="Password" value={this.state.password} onChange={this.handleInputChange}/>
+                        <Title>Role</Title>
+                        <Input name="role" placeholder="Role" value={this.state.role} onChange={this.handleInputChange}/>
+                        <FormButton onClick={this.handleFormSubmit}>Submit Request</FormButton>
                     </form>
                     {this.state.isredirect? (<Redirect to={{pathname:"/userlist", state:this.state}}/>) : null}
                 </Container>

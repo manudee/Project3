@@ -26,6 +26,9 @@ var UserSchema = new Schema({
 
 });
 
+UserSchema.methods.comparePassword = function(password) {
+  return (password=== this.password);
+};
 
 var user = mongoose.model("user",UserSchema);
 

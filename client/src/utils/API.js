@@ -50,6 +50,15 @@ export default {
 
     getUsers:function(){
         return axios.get('/api/createuser')
+    },
+    login:function(userObj){
+        return axios.post('/api/createuser/sign_in',userObj)
+        // .then(response=>
+        // {
+        //     console.log(response);
+        // })
+        // .catch(err =>{
+        //     console.log(err.response);
+        // })
     }
-
 }
