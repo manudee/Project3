@@ -64,7 +64,7 @@ class ManagerTable extends Component {
 
         return (
             <div>
-                <div className="row">
+                <div className="row btn-toolbar">
                     <SaveBtn onClick={this.handleRedirectCreateRequest} value='Create Request' />
                     {this.state.isredirectCreateRequest ? (<Redirect to={{ pathname: "/createrequest", state: this.state }} />) : null}
                     <SaveBtn onClick={this.handleRedirectCreateUser} value='Create User' />
@@ -114,6 +114,12 @@ class ManagerTable extends Component {
                                         </Col>
                                         <Col size="md-2">
                                             {managerDataValue.quantity}
+                                        </Col>
+                                          <Col size="md-1">
+                                            <SaveBtn value='Approve' />
+                                        </Col>
+                                        <Col size="md-1">
+                                            <SaveBtn value='Reject' />
                                         </Col>
                                     </Row>
 
