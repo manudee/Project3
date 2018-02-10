@@ -2,6 +2,7 @@ const router = require("express").Router();
 const reqRoutes = require("./request.js");
 const equipRoutes = require("./equipment.js");
 const userRoutes = require("./user.js");
+const path = require('path');
 // req routes
 router.use("/api/createRequest", reqRoutes);
 
