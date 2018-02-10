@@ -6,6 +6,15 @@ import API from "../utils/API";
 
 class UserList extends Component {
 
+
+
+    // state = {
+
+    //     users = []
+
+    // }
+
+
     componentDidMount() {
         this.loadEquipments();
       }

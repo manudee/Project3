@@ -30,7 +30,7 @@ export default {
 
     getRequests: function () {
         return axios.get("/api/createRequest");
-    }
+    },
 
 
     getEquipment:function(){

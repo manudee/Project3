@@ -2,88 +2,132 @@ import React, { Component } from 'react';
 import ReactTable from 'react-table';
 import "react-table/react-table.css";
 import { SaveBtn } from "../components/Button/SaveBtn.js";
+import { Col, Row, Container } from '../components/Grid'
+import { List, ListItem } from "../components/List";
+import API from '../utils/API';
+import { Redirect } from 'react-router-dom';
+
 
 class ManagerTable extends Component {
+
+    state = {
+
+        managerData: [],
+        isredirectCreateUser: false,
+        isredirectCreateRequest: false,
+        isredirectAllUsers: false,
+        isredirectAllEquipments: false
+    }
+
+
+
+    componentDidMount() {
+        this.getRequests();
+    }
+
+
+    getRequests = () => {
+
+        API.getRequests()
+            .then(res => this.setState({ managerData: res.data }))
+            .catch(err => console.log(err));
+
+    }
+
+
+
+    handleRedirectCreateUser = event => {
+        event.preventDefault();
+        this.setState({ isredirectCreateUser: true });
+    }
+
+    handleRedirectCreateRequest = event => {
+        event.preventDefault();
+        this.setState({ isredirectCreateRequest: true });
+    }
+
+    handleRedirectAllUsers = event => {
+        event.preventDefault();
+        this.setState({ isredirectAllUsers: true });
+    }
+
+    handleRedirectAllEquipments = event => {
+        event.preventDefault();
+        this.setState({ isredirectAllEquipments: true });
+    }
+
+
+
+
     render() {
-        const data = [{
-            Reqid: '101010',
-            userName: 'Manasi',
-            equipment: 'Laptop',
-            Description: 'This is a laptop request',
-            Quantity: 10,
-            Justification: 'This is a laptop request for Manasi'
-        },
-        {
-            Reqid: '202020',
-            userName: 'Abhijit',
-            equipment: 'Mouse',
-            Description: 'This is a Mouse request',
-            Quantity: 10,
-            Justification: 'This is a laptop request for Abhijit'
-        }, {
-            Reqid: '202020',
-            userName: 'Brian',
-            equipment: 'PC',
-            Description: 'This is a PC request',
-            Quantity: 10,
-            Justification: 'This is a PC request for Brian'
-        },
 
-        {
-            Reqid: '202020',
-            userName: 'Ted',
-            equipment: 'Monitor',
-            Description: 'This is a Monitor request',
-            Quantity: 10,
-            Justification: 'This is a Monitor request for Ted'
-        }
-        ]
-
-        const columns = [{
-            Header: 'Reqid',
-            accessor: 'Reqid'
-
-
-        }, {
-            Header: 'userName',
-            accessor: 'userName',
-          
-        },
-        {
-            Header: 'equipment',
-            accessor: 'equipment',
-          
-        }, {
-            Header: 'Description', // Custom header components!
-            accessor: 'Description'
-        },
-        {
-            Header: 'Quantity', // Custom header components!
-            accessor: 'Quantity'
-        },
-        {
-            Header: 'Justification', // Custom header components!
-            accessor: 'Justification'
-        },
-        {
-            Header: 'Action',
-            accessor: 'Action',
-            Cell: () => (<SaveBtn value='Approve' />)
-        }]
 
         return (
             <div>
                 <div className="row">
-                    <SaveBtn value='Create Request' />
-                    <SaveBtn value='Create User' />
-                    <SaveBtn value='All Users' />
-                    <SaveBtn value='All Equipments' />
+                    <SaveBtn onClick={this.handleRedirectCreateRequest} value='Create Request' />
+                    {this.state.isredirectCreateRequest ? (<Redirect to={{ pathname: "/createrequest", state: this.state }} />) : null}
+                    <SaveBtn onClick={this.handleRedirectCreateUser} value='Create User' />
+                    {this.state.isredirectCreateUser ? (<Redirect to={{ pathname: "/createuser", state: this.state }} />) : null}
+                    <SaveBtn onClick={this.handleRedirectAllUsers} value='All Users' />
+                    {this.state.isredirectAllUsers ? (<Redirect to={{ pathname: "/userlist", state: this.state }} />) : null}
+                    <SaveBtn onClick={this.handleRedirectAllEquipments} value='All Equipments' />
+                    {this.state.isredirectAllEquipments ? (<Redirect to={{ pathname: "/equipment", state: this.state }} />) : null}
                 </div>
-                <ReactTable
-                    data={data}
-                    columns={columns}
-                    defaultPageSize={10}
-                    className="-striped -highlight text-center" /></div>)
+                <Container fluid className='card'>
+
+                    <Row className='card-header'>
+                        <Col size="md-2">
+                            <h6>Request Id </h6>
+                        </Col>
+                        {/* <Col size="md-2">
+              <h6>Username</h6>
+            </Col> */}
+                        <Col size="md-2">
+                            <h6>Equipment</h6>
+                        </Col>
+                        <Col size="md-2">
+                            <h6>Description</h6>
+                        </Col>
+                        <Col size="md-2">
+                            <h6>Quantity</h6>
+                        </Col>
+                    </Row>
+
+                    {this.state.managerData.length ? (
+                        <List>
+                            {this.state.managerData.map(managerDataValue => (
+                                <ListItem key={managerDataValue._id}>
+
+                                    <Row className="card-block">
+                                        <Col size="md-2">
+                                            <a href={"/api/user" + managerDataValue._id}>{managerDataValue._id}</a>
+                                        </Col>
+                                        <Col size="md-2">
+                                            {managerDataValue.username}
+                                        </Col>
+                                        <Col size="md-2">
+                                            {managerDataValue.equipment}
+                                        </Col>
+                                        <Col size="md-2">
+                                            {managerDataValue.description}
+                                        </Col>
+                                        <Col size="md-2">
+                                            {managerDataValue.quantity}
+                                        </Col>
+                                    </Row>
+
+                                </ListItem>
+                            ))}
+                        </List>
+                    ) : (
+                            <h3>No Requests opened yet</h3>
+                        )}
+
+
+                </Container>
+            </div>
+        )
     }
 }
 

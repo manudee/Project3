@@ -29,7 +29,6 @@ class UserTable extends Component {
     API.getRequests()
       .then(res => this.setState({ requests: res.data }))
       .catch(err => console.log(err));
-    // .then(res => console.log(res));
 
   }
 
@@ -45,37 +44,8 @@ class UserTable extends Component {
           <SaveBtn value='Create Request' />
         </div>
 
-        <Container fluid className='card'
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        >
-          
+        <Container fluid className='card'>
+
           <Row className='card-header'>
             <Col size="md-2">
               <h6>Request Id </h6>
@@ -99,23 +69,23 @@ class UserTable extends Component {
               {this.state.requests.map(requests => (
                 <ListItem key={requests._id}>
 
-                    <Row className="card-block">
-                      <Col size="md-2">
-                        <a href={"/api/user" + requests._id}>{requests._id}</a>
-                      </Col>
-                      <Col size="md-2">
-                        {requests.equipment}
-                      </Col>
-                      <Col size="md-2">
-                        {requests.description}
-                      </Col>
-                      <Col size="md-2">
-                        {requests.quantity}
-                      </Col>
-                      <Col size="md-2">
-                        {requests.justification}
-                      </Col>
-                    </Row>
+                  <Row className="card-block">
+                    <Col size="md-2">
+                      <a href={"/api/user" + requests._id}>{requests._id}</a>
+                    </Col>
+                    <Col size="md-2">
+                      {requests.equipment}
+                    </Col>
+                    <Col size="md-2">
+                      {requests.description}
+                    </Col>
+                    <Col size="md-2">
+                      {requests.quantity}
+                    </Col>
+                    <Col size="md-2">
+                      {requests.justification}
+                    </Col>
+                  </Row>
 
                 </ListItem>
               ))}
@@ -128,11 +98,6 @@ class UserTable extends Component {
         </Container>
 
 
-        {/* <ReactTable
-                data={data}
-                columns={columns}
-                defaultPageSize={10}
-                className="-striped -highlight text-center" /> */}
 
       </div>)
   }
