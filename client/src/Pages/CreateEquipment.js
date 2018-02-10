@@ -34,7 +34,7 @@ class CreateEquipment extends Component{
         var equipmentInfo = {}
         equipmentInfo.equipmentDesc = equipment;
         equipmentInfo.brand = description;
-        equipmentInfo.qty = quantity;
+        equipmentInfo.quantity = quantity;
       
 
         console.log(equipmentInfo);

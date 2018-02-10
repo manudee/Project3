@@ -72,7 +72,7 @@ class ManagerTable extends Component {
                     <SaveBtn onClick={this.handleRedirectAllUsers} value='All Users' />
                     {this.state.isredirectAllUsers ? (<Redirect to={{ pathname: "/userlist", state: this.state }} />) : null}
                     <SaveBtn onClick={this.handleRedirectAllEquipments} value='All Equipments' />
-                    {this.state.isredirectAllEquipments ? (<Redirect to={{ pathname: "/equipment", state: this.state }} />) : null}
+                    {this.state.isredirectAllEquipments ? (<Redirect to={{ pathname: "/equipments", state: this.state }} />) : null}
                 </div>
                 <Container fluid className='card'>
 
