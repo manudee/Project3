@@ -4,12 +4,16 @@ var Schema = mongoose.Schema;
 
 var requestSchema = new Schema({
 
-    equipmentID: {
+    equipment: {
         type: String,
         required: true
     },
-
-    qty: {
+    
+    description: {
+        type: String,
+        required: true
+    },
+    quantity: {
         type: Number,
         required: true
     },
@@ -20,30 +24,40 @@ var requestSchema = new Schema({
 
     },
 
-    status: {
-        type: String,
-        required: true
+    reqStatus: {
+        type: Boolean,
+        required: true,
+        default: false
 
 
     },
 
+    equipmentStatus: {
+        type: Boolean,
+        required: true,
+        default: false
 
-    user: [{
-
-        type: Schema.Types.ObjectId,
-        ref: 'user'
 
     }
-    ],
+    
+    // ,
+
+    // user: [{
+
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'user'
+
+    // }
+    // ],
 
 
-    assetID: [{
+    // assetID: [{
 
-        type: Schema.Types.ObjectId,
-        ref: 'equipment'
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'equipment'
 
 
-    }]
+    // }]
 
 });
 

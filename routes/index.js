@@ -1,6 +1,7 @@
 const router = require("express").Router();
-const articleRoutes = require("./articles");
+const reqRoutes = require("./request.js");
 
-router.use("/", articleRoutes);
+// req routes
+router.use("/api/createRequest", reqRoutes);
 
 module.exports = router;
