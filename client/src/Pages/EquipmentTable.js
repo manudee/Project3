@@ -1,56 +1,80 @@
 import React, { Component } from 'react';
 import ReactTable from 'react-table';
 import "react-table/react-table.css";
-import {SaveBtn} from "../components/Button/SaveBtn.js";
+import { SaveBtn } from "../components/Button/SaveBtn.js";
 
 class EquipmentTable extends Component {
 
-state = {
+  state = {
 
-  data : [{
-    equipmentId: "",
-    equimentName: "",
-    quantity: 10
-  }]
+    data: [{
+      equipmentDesc: "",
+      brand: "",
+      quantity: ""
+    }]
 
-}
+  }
 
 
-handleUpdate = event => {
-  event.preventDefault();
-  
+  handleUpdate = event => {
+    event.preventDefault();
+    console.log("I AM In handleupdate");
 
-}
+    var equipmentInfo = {};
+
+    equipmentInfo.equipmentDesc = this.state
+
+
+  }
+
+
+  handleDelete = event => {
+    event.preventDefault();
+    console.log("I AM In handleDelete");
+
+    var equipmentInfo = {};
+
+
+
+
+  }
+
+
+  handleCreateEquipment = event => {
+    event.preventDefault();
+    console.log("In handleCreate Equipment")
+
+  }
 
 
 
   render() {
     const data = [{
-      equipmentId: '101010',
-      equipmentName: 'Laptop',
+      equipmentDesc: '101010',
+      brand: 'Laptop',
       quantity: 10
     },
     {
-        equipmentId: '202020',
-        equipmentName: 'Mouse',
-        quantity: 30
+      equipmentDesc: '202020',
+      brand: 'Mouse',
+      quantity: 30
     }, {
-        equipmentId: '303030',
-        equipmentName: 'keyboard',
-        quantity: 30
+      equipmentDesc: '303030',
+      brand: 'keyboard',
+      quantity: 30
     }
 
     ]
 
     const columns = [{
-      Header: 'Equipment id',
-      accessor: 'equipmentId'
+      Header: 'Equipment Description',
+      accessor: 'equipmentDesc'
 
 
     }, {
-      Header: 'Equipment Name',
-      accessor: 'equipmentName',
-       // Custom cell components!
+      Header: 'Brand',
+      accessor: 'brand',
+      // Custom cell components!
     }, {
       Header: 'Quantity', // Custom header components!
       accessor: 'quantity'
@@ -58,21 +82,21 @@ handleUpdate = event => {
     {
       Header: 'Update',
       accessor: 'updateAction',
-      Cell: () => (<SaveBtn value='Update'/>)
+      Cell: () => (<SaveBtn onClick={this.handleUpdate} value='Update' />)
     },
     {
-        Header: 'Delete',
-        accessor: 'deleteAction',
-        Cell: () => (<SaveBtn value='Delete'/>)
-      }
+      Header: 'Delete',
+      accessor: 'deleteAction',
+      Cell: () => (<SaveBtn onClick={this.handleDelete} value='Delete' />)
+    }
 
-]
+    ]
 
     return (
       <div>
-      <div>
-        <SaveBtn value='Create Equipment'/>
-       </div> 
+        <div>
+          <SaveBtn onClick={this.handleCreateEquipment} value='Create Equipment' />
+        </div>
         <ReactTable
           data={data}
           columns={columns}

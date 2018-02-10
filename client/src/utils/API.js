@@ -14,6 +14,11 @@ export default {
             .catch(error => {
                 console.log(error.response)
             });
+    },
+
+
+    getRequests: function () {
+        return axios.get("/api/createRequest");
     }
 
 
