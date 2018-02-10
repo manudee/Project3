@@ -3,7 +3,14 @@ import ReactTable from 'react-table';
 import "react-table/react-table.css";
 import {SaveBtn} from "../components/Button/SaveBtn.js";
 
+
+
 class UserTable extends Component {
+  
+
+
+
+
   render() {
     const data = [{
       Reqid: '101010',

@@ -3,6 +3,7 @@ import {Input} from '../components/Form/Input.js';
 import {FormButton} from '../components/Form/FormButton.js';
 import Title from '../components/Title/Title.js';
 import Container from '../components/Container/Container';
+import API from '../utils/API';
 
 
 
@@ -30,12 +31,21 @@ class CreateEquipment extends Component{
        
 
         var equipmentInfo = {}
-        equipmentInfo.equipment = equipment;
-        equipmentInfo.description = description;
-        equipmentInfo.quantity = quantity;
+        equipmentInfo.equipmentDesc = equipment;
+        equipmentInfo.brand = description;
+        equipmentInfo.qty = quantity;
       
 
         console.log(equipmentInfo);
+
+
+        API.createEquipment(equipmentInfo)
+        .then(res => this.setState(this.setState({
+            equipment: "", 
+            description: "",
+            quantity: ""
+        })))
+        .catch(err => console.log("error is " + err));
 
        }
 
