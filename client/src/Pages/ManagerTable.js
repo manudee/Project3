@@ -9,6 +9,7 @@ import API from '../utils/API';
 import { Redirect } from 'react-router-dom';
 
 
+
 class ManagerTable extends Component {
 
     state = {
@@ -135,9 +136,11 @@ class ManagerTable extends Component {
 
                 </Container>
          {/*Chat element from Socket io*/}
-                <div>
-                    <Chat/>
-                </div>
+               {// <div>
+                  //  <Chat/>
+                //</div>
+            }
+
             </div>
         )
 
