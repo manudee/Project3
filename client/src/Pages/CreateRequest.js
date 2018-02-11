@@ -8,11 +8,13 @@ import Container from '../components/Container/Container';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import API from '../utils/API';
 import {Redirect} from 'react-router-dom';
+import { DropdownButton, MenuItem, ButtonToolbar } from 'react-bootstrap';
+
 
 class CreateRequest extends Component {
 
     state = {
-        equipment: "",
+        equipment: ['avaya','brian','brian','brian','brian'],
         description: "",
         quantity: "",
         justification: "",
@@ -55,16 +57,48 @@ class CreateRequest extends Component {
             .then(() => this.setState({isredirect:true}))
             .catch(err => console.log("error is " + err));
 
-
-
-
     }
 
+    // const BUTTONS = ['Default', 'Primary', 'Success', 'Info', 'Warning', 'Danger'];
 
 
-
-
-
+    // renderDropdownButton = ()=> {
+    //     <SplitButton
+    //       bsStyle={"Default"}
+    //       title={"equipment"}
+    //       key={"0"}
+    //       id={`split-button-basic-0`}
+    //     >
+    //       <MenuItem eventKey="1">Action</MenuItem>
+    //       <MenuItem eventKey="2">Another action</MenuItem>
+    //       <MenuItem eventKey="3">Something else here</MenuItem>
+    //       <MenuItem divider />
+    //       <MenuItem eventKey="4">Separated link</MenuItem>
+    //     </SplitButton>
+    // }
+/*<ButtonToolbar>
+                            <DropdownButton
+                              bsStyle={'primary'}
+                              title={'Equipment'}
+                              key={'0'}
+                              id={`dropdown-basic-0`}
+                            >
+                              <MenuItem eventKey="1">Action</MenuItem>
+                              <MenuItem eventKey="2">Another action</MenuItem>
+                              <MenuItem eventKey="3" active>
+                                Active Item
+                              </MenuItem>
+                              <MenuItem divider />
+                              <MenuItem eventKey="4">Separated link</MenuItem>
+                            </DropdownButton>
+                        </ButtonToolbar>
+                        */
+/*<select>
+                        {this.state.equipment.map(equip =>(
+                                <option value = {equip}>{equip}</option>
+                            ))
+                        }
+                        </select>*/
 
     render() {
         return (
@@ -73,10 +107,6 @@ class CreateRequest extends Component {
                     <form>
                         <Title>Equipment</Title>
                         <Input name="equipment" placeholder="Equipment" value={this.state.equipment} onChange={this.handleInputChange} />
-                        <div onChange={this.setrequestType.bind(this)}>
-                            <Input type="radio" value="checkout" name="requestType" />Checkout
-                <Input type="radio" value="return" name="requestType" />Return
-                </div>
                         <Title>Description</Title>
                         <Input name="description" placeholder="Description" value={this.state.description} onChange={this.handleInputChange} />
                         <Title>Quantity</Title>

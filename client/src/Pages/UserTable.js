@@ -112,10 +112,10 @@ class UserTable extends Component {
                 className="-striped -highlight text-center" /> */}
 
       {/*Chat element from Socket io*/}
-        <div>
-            <Chat/>
-        </div>
-
+        {//<div>
+          //  <Chat/>
+        //</div>
+        }
       </div>)
   }
 }
