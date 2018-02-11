@@ -13,6 +13,14 @@ export default {
             });
     },
 
+    login: function(logindata){
+        console.log("I AM IN LOGIN");
+        return axios.post('/api/createuser/login', logindata)
+        .then(response => {console.log(response)})
+        .catch(error => {
+            console.log(error.response)
+        });
+    },
 
     createEquipment:function(equipmentInfo){
 
@@ -35,7 +43,8 @@ export default {
     },
 
     createUser:function(userInfo){
-        return axios.post('/api/createuser',userInfo)
+        console.log("In CreateUser API");
+        return axios.post('/api/createuser/signup',userInfo)
         .then(response=>{
             console.log(response);
         })
