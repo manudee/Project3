@@ -24,21 +24,13 @@ var requestSchema = new Schema({
 
     },
 
-    reqStatus: {
-        type: Boolean,
-        required: true,
-        default: false
-
-
-    },
-
-    equipmentStatus: {
-        type: Boolean,
-        required: true,
-        default: false
-
-
-    }
+     status: {
+        type: Number,         
+        default:0,
+        min:0,
+        max:5
+     }
+    
     
     // ,
 

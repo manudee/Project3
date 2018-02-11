@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import ReactTable from 'react-table';
+
 import "react-table/react-table.css";
 import { SaveBtn } from "../components/Button/SaveBtn.js";
+import Chat from "../components/Chat/Chat.js";
 import { Col, Row, Container } from '../components/Grid'
 import { List, ListItem } from "../components/List";
 import API from '../utils/API';
 import { Redirect } from 'react-router-dom';
+
 
 
 class ManagerTable extends Component {
@@ -29,7 +31,8 @@ class ManagerTable extends Component {
     getRequests = () => {
 
         API.getRequests()
-            .then(res => this.setState({ managerData: res.data }))
+            .then(res => this.setState({ managerData: res.data })
+        )
             .catch(err => console.log(err));
 
     }
@@ -58,6 +61,29 @@ class ManagerTable extends Component {
 
 
 
+    updateRequest = (id,status) => {
+
+        var id=id;
+        var modifyRequest ={};
+        modifyRequest.status=status;
+        console.log(id)
+        console.log(status)
+        API.updateRequest(id,modifyRequest)
+            .then(res=>this.getRequests())
+            .catch(err => console.log(err));
+    }
+
+    renderSwitch(status,id){
+        switch (status) {
+            case 0: return(<div><SaveBtn onClick={()=>this.updateRequest(id,1)} value='Approve' />
+            <SaveBtn onClick={()=>this.updateRequest(id,4)} value='Reject' /></div>);
+            case 1: return (<p>Checkout Approved</p>);
+            case 2:  return (<div><SaveBtn onClick={()=>this.updateRequest(id,3)}  value='Approve Return' /></div>);
+            case 3:  return (<p>Request Completed</p>);
+            case 4:  return (<p>Rejected</p>);
+            default:   return(<p>Nothing</p>)
+          }
+    }
 
     render() {
 
@@ -74,6 +100,7 @@ class ManagerTable extends Component {
                     <SaveBtn onClick={this.handleRedirectAllEquipments} value='All Equipments' />
                     {this.state.isredirectAllEquipments ? (<Redirect to={{ pathname: "/equipments", state: this.state }} />) : null}
                 </div>
+
                 <Container fluid className='card'>
 
                     <Row className='card-header'>
@@ -115,12 +142,14 @@ class ManagerTable extends Component {
                                         <Col size="md-2">
                                             {managerDataValue.quantity}
                                         </Col>
-                                          <Col size="md-1">
-                                            <SaveBtn value='Approve' />
+                                        
+                                          <Col size="md-2">
+                                          
+                                          {this.renderSwitch(managerDataValue.status,managerDataValue._id)}
+                                              
+                                           
                                         </Col>
-                                        <Col size="md-1">
-                                            <SaveBtn value='Reject' />
-                                        </Col>
+                                      
                                     </Row>
 
                                 </ListItem>
@@ -132,8 +161,15 @@ class ManagerTable extends Component {
 
 
                 </Container>
+         {/*Chat element from Socket io*/}
+               {// <div>
+                  //  <Chat/>
+                //</div>
+            }
+
             </div>
         )
+
     }
 }
 

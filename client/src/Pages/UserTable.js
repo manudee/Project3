@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import ReactTable from 'react-table';
 import "react-table/react-table.css";
 import { SaveBtn } from "../components/Button/SaveBtn.js";
 import API from '../utils/API';
 import { Col, Row, Container } from '../components/Grid'
 import { List, ListItem } from "../components/List";
+import Chat from "../components/Chat/Chat.js";
 import {Redirect} from 'react-router-dom'; 
 
 
@@ -37,6 +37,29 @@ class UserTable extends Component {
   handleRedirect= event =>{
     event.preventDefault();
     this.setState({isredirect:true});
+  }
+
+  updateRequest = (id,status) => {
+
+    var id=id;
+    var modifyRequest ={};
+    modifyRequest.status=status;
+    console.log(id)
+    console.log(status)
+    API.updateRequest(id,modifyRequest)
+        .then(res=>this.getRequests())
+        .catch(err => console.log(err));
+}
+
+renderSwitch(status,id){
+    switch (status) {
+      case 1: return (<div><SaveBtn onClick={()=>this.updateRequest(id,2)} value='Return' /></div>);
+      case 2:  return (<p>Pending Return Approval</p>);
+      case 3:  return (<p>Request Completed</p>);
+      case 4:  return (<p>Rejected</p>);
+      case 0:      return (<p>Pending Checkout Approval</p>);
+
+    }
   }
 
 
@@ -89,7 +112,7 @@ class UserTable extends Component {
                       {requests.quantity}
                     </Col>
                     <Col size="md-2">
-                      {requests.justification}
+                    {this.renderSwitch(requests.status,requests._id)}
                     </Col>
                   </Row>
 
@@ -103,6 +126,18 @@ class UserTable extends Component {
 
         </Container>
 
+
+        {/* <ReactTable
+                data={data}
+                columns={columns}
+                defaultPageSize={10}
+                className="-striped -highlight text-center" /> */}
+
+      {/*Chat element from Socket io*/}
+        {//<div>
+          //  <Chat/>
+        //</div>
+        }
       </div>)
   }
 }

@@ -5,9 +5,22 @@ const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
 var db = require('./models');
+
 const passport = require('passport');
 
+// const http = require('http');
+// var socket = require('socket.io');
+
+// var server = http.createServer(app);
+// const io = socket(server);
+
+
 var request = require('request');
+
+//Socket connection
+// io.on('connection', (socket) => {
+// 	console.log(socket.id);
+// })
 
 // Configure body parser for AJAX requests
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -38,6 +51,7 @@ mongoose.connect(
 // connect to the database and load models
 
 // Start the API server
+// server.listen(PORT, function () {
 app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
