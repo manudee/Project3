@@ -4,9 +4,6 @@ import axios from "axios";
 export default {
 
     createRequest: function (requestInfo) {
-
-        // console.log(" I Am IN API");
-        //saves incoming user req data to DB
         return axios.post('/api/createRequest', requestInfo)
             .then(response => {
                 console.log(response);
@@ -34,7 +31,6 @@ export default {
 
 
     getEquipment:function(){
-        console.log("I am in API")
         return axios.get('/api/createequipment')
     },
 
@@ -50,6 +46,11 @@ export default {
 
     getUsers:function(){
         return axios.get('/api/createuser')
+    },
+
+    updateRequest: function(id,status){
+        console.log(status);
+        return axios.post('/api/createRequest/'+id,status)
     }
 
 }
