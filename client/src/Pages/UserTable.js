@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactTable from 'react-table';
 import "react-table/react-table.css";
 import { SaveBtn } from "../components/Button/SaveBtn.js";
 import API from '../utils/API';
@@ -89,7 +88,15 @@ class UserTable extends Component {
                       {requests.quantity}
                     </Col>
                     <Col size="md-2">
-                      {requests.justification}
+                    {(() => {
+        switch (requests.status) {
+          case "1": return (<div><SaveBtn value='Return' /></div>);
+          case "2":  return (<p>Pending Return Approval</p>);
+          case "3":  return (<p>Request Completed</p>);
+          case "4":  return (<p>Rejected</p>);
+          default:      return (<p>Pending Checkout Approval</p>);
+        }
+      })()}
                     </Col>
                   </Row>
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactTable from 'react-table';
+
 import "react-table/react-table.css";
 import { SaveBtn } from "../components/Button/SaveBtn.js";
 import API from "../utils/API";

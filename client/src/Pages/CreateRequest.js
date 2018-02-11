@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Input } from '../components/Form/Input.js';
 import { FormButton } from '../components/Form/FormButton.js';
 import Title from '../components/Title/Title.js';
-import { RequestButton } from '../components/Form/RadioButton.js';
+
 import { TextArea } from './../components/Form/TextArea';
 import Container from '../components/Container/Container';
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
+
 import API from '../utils/API';
 import {Redirect} from 'react-router-dom';
 
@@ -38,8 +38,8 @@ class CreateRequest extends Component {
         var requestInfo = {}
         requestInfo.equipment = this.state.equipment;
         requestInfo.description = this.state.description;
-        requestInfo.reqStatus = false;
-        requestInfo.equipmentStatus = false;
+     
+        // requestInfo.equipmentStatus = false;
         requestInfo.quantity = this.state.quantity;
         requestInfo.justification = this.state.justification;
 
