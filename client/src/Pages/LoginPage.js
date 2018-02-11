@@ -11,11 +11,6 @@ import API from '../utils/API';
 
 class LoginPage extends Component {
 
-    // state = {
-    //     username: "",
-    //     password: ""
-    // }
-
     constructor(props, context) {
         super(props, context);
 
@@ -41,26 +36,6 @@ class LoginPage extends Component {
         this.changeUser = this.changeUser.bind(this);
     }
 
-    // handleInputChange = event => {
-    //     const { name, value } = event.target;
-    //     this.setState({
-    //         [name]: value
-    //     })
-    // };
-
-    // handleFormSubmit = event => {
-    //     event.preventDefault();
-
-    //     var username = this.state.username;
-    //     var password = this.state.password;
-
-    //     var loginInfo = {}
-    //     loginInfo.username = username;
-    //     loginInfo.password = password;
-
-    //     console.log(loginInfo);
-
-    // }
 
     processForm(event) {
         // prevent default action. in this case, action is the form submission event
@@ -75,6 +50,7 @@ class LoginPage extends Component {
         formData.username = username;
         formData.password = password;
 
+        console.log("MyData")
         console.log(formData);
 
 

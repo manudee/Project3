@@ -97,7 +97,7 @@ class CreateUser extends Component {
         //         localStorage.setItem('successMessage', xhr.response.message);
 
         //         // redirect user after sign up to login page
-        //         this.props.history.push('/login');
+        //         this.props.history.push('/user');
         //     } else {
         //         // failure
 

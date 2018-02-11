@@ -8,7 +8,8 @@ router.route("/")
   .post(usersController.create)
 
 router.post('/login', (req, res, next) => {
-console.log("I am in login for routes /login");
+
+  console.log("I am in login for routes /login");
   function validateLoginForm(payload) {
     console.log("In validation form " + payload.username);
     const errors = {};
@@ -37,7 +38,9 @@ console.log("I am in login for routes /login");
   }
 
   const validationResult = validateLoginForm(req.body);
+
   console.log("Validatio result " + validationResult.success)
+
   if (!validationResult.success) {
     return res.status(400).json({
       success: false,
@@ -50,6 +53,7 @@ console.log("I am in login for routes /login");
   return passport.authenticate('local-login', (err, token, userData) => {
 
     console.log("I AM IN Local login route");
+    console.log('token ' + token);
 
     if (err) {
       if (err.name === 'IncorrectCredentialsError') {
@@ -66,15 +70,18 @@ console.log("I am in login for routes /login");
     }
 
 
+
+
     return res.json({
       success: true,
       message: 'You have successfully logged in!',
       token,
       user: userData
     });
-  })(req, res, next);
-});
 
+  })(req, res, next);
+
+});
 
 router.post('/signup', (req, res, next) => {
 
@@ -143,5 +150,8 @@ router.post('/signup', (req, res, next) => {
     });
   })(req, res, next);
 });
+
+
+
 
 module.exports = router;

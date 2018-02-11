@@ -20,7 +20,7 @@ var UserSchema = new Schema({
 
     role: {
         type: String,
-        default: 'U'//U for user and M for Manager
+        default: 'User'//U for user and M for Manager
     }
 
 
