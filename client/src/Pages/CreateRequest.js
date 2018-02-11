@@ -14,7 +14,8 @@ import { DropdownButton, MenuItem, ButtonToolbar } from 'react-bootstrap';
 class CreateRequest extends Component {
 
     state = {
-        equipment: ['avaya','brian','brian','brian','brian'],
+        stock:[],
+        equipment: "",
         description: "",
         quantity: "",
         justification: "",
@@ -32,7 +33,23 @@ class CreateRequest extends Component {
         //console.log(event.target.value)
         this.setState({ checkout: event.target.value });
         return event.target.value;
+    };
+
+    componentDidMount() {
+        this.loadEquipments();
     }
+
+
+      loadEquipments = () => {
+        API.getEquipment()
+          // .then(res=>console.log(res.data))
+          .then(response => {
+            
+                this.setState({ stock: response.data })
+
+            })
+          .catch(err => console.log(err))
+      }
 
     handleFormSubmit = event => {
         event.preventDefault();
@@ -94,7 +111,7 @@ class CreateRequest extends Component {
                         </ButtonToolbar>
                         */
 /*<select>
-                        {this.state.equipment.map(equip =>(
+                        {this.state.stock.map(equip =>(
                                 <option value = {equip}>{equip}</option>
                             ))
                         }
@@ -106,7 +123,17 @@ class CreateRequest extends Component {
                 <Container>
                     <form>
                         <Title>Equipment</Title>
-                        <Input name="equipment" placeholder="Equipment" value={this.state.equipment} onChange={this.handleInputChange} />
+                        <div align="center">
+                            <select name = "equipment" class='text-center' onChange = {this.handleInputChange} >
+                                <option >Please pick from one of the following</option>
+                            {
+                                this.state.stock.map(equip =>(
+                                        <option value = {equip.equipmentDesc}>{equip.equipmentDesc+'-'+equip.brand}</option>
+                                    )
+                                )
+                            }
+                            </select>
+                        </div>
                         <Title>Description</Title>
                         <Input name="description" placeholder="Description" value={this.state.description} onChange={this.handleInputChange} />
                         <Title>Quantity</Title>
