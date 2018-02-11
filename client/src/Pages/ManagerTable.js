@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactTable from 'react-table';
+
 import "react-table/react-table.css";
 import { SaveBtn } from "../components/Button/SaveBtn.js";
 import Chat from "../components/Chat/Chat.js";
@@ -31,7 +31,8 @@ class ManagerTable extends Component {
     getRequests = () => {
 
         API.getRequests()
-            .then(res => this.setState({ managerData: res.data }))
+            .then(res => this.setState({ managerData: res.data })
+        )
             .catch(err => console.log(err));
 
     }
@@ -58,6 +59,9 @@ class ManagerTable extends Component {
         this.setState({ isredirectAllEquipments: true });
     }
 
+    handleRequestState = () =>{
+
+    }
 
 
 
@@ -118,12 +122,22 @@ class ManagerTable extends Component {
                                         <Col size="md-2">
                                             {managerDataValue.quantity}
                                         </Col>
-                                          <Col size="md-1">
-                                            <SaveBtn value='Approve' />
+                                        
+                                          <Col size="md-2">
+                                          
+                                          {(() => {
+        switch (managerDataValue.status) {
+          case "1": return (<p>Checkout Approved</p>);
+          case "2":  return (<div><SaveBtn value='Approve' /></div>);
+          case "3":  return (<p>Request Completed</p>);
+          case "4":  return (<p>Rejected</p>);
+          default:      return (<div> <SaveBtn value='Approve' /><SaveBtn value='Reject' /></div>);
+        }
+      })()}
+                                              
+                                           
                                         </Col>
-                                        <Col size="md-1">
-                                            <SaveBtn value='Reject' />
-                                        </Col>
+                                      
                                     </Row>
 
                                 </ListItem>
