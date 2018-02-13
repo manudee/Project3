@@ -87,20 +87,15 @@ class EquipmentTable extends Component {
         <Container fluid className='card'>
 
           <Row className='card-header'>
-            <Col size="md-2">
-              <h6>Request Id </h6>
-            </Col>
+        
             <Col size="md-2">
               <h6>Equipment</h6>
             </Col>
             <Col size="md-2">
-              <h6>Description</h6>
+              <h6>Brand</h6>
             </Col>
             <Col size="md-2">
               <h6>Quantity</h6>
-            </Col>
-            <Col size="md-2">
-              <h6>Justification</h6>
             </Col>
           </Row>
 
