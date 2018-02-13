@@ -23,7 +23,7 @@ export default {
     },
 
     createEquipment:function(equipmentInfo){
-
+        console.log("In Createequipment API");
         return axios.post('/api/createequipment',equipmentInfo)
         .then(response=>{
             console.log(response);
@@ -43,7 +43,7 @@ export default {
     },
 
     createUser:function(userInfo){
-        console.log("In CreateUser API");
+        
         return axios.post('/api/createuser/signup',userInfo)
         .then(response=>{
             console.log(response);
