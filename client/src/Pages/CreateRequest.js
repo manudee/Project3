@@ -14,6 +14,7 @@ import { DropdownButton, MenuItem, ButtonToolbar } from 'react-bootstrap';
 class CreateRequest extends Component {
 
     state = {
+        url:"",
         stock:[],
         equipment: "",
         equipDesc:"",
@@ -45,7 +46,9 @@ class CreateRequest extends Component {
         }
         // console.log(name)
     };
-
+    handleCancel= ()=>{
+        this.setState({isredirect:true})
+    }
     setrequestType(event) {
         //console.log(event.target.value)
         this.setState({ checkout: event.target.value });
@@ -57,7 +60,7 @@ class CreateRequest extends Component {
     }
 
 
-      loadEquipments = () => {
+    loadEquipments = () => {
         API.getEquipment()
           // .then(res=>console.log(res.data))
           .then(response => {
@@ -70,7 +73,7 @@ class CreateRequest extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-
+        this.setState({url:"user"});
         var requestInfo = {}
         requestInfo.equipment = this.state.equipment;
         requestInfo.equipDesc = this.state.equipDesc;
@@ -85,25 +88,27 @@ class CreateRequest extends Component {
         var finalQuantity = this.state.old_Quan -  this.state.quantity
 
         console.log(finalQuantity);
-        if(finalQuantity>=0){
+        if(finalQuantity>=0&&requestInfo.equipment&&requestInfo.equipDesc&&requestInfo.description&&requestInfo.justification){
             API.updateEquip(this.state.equipId,{quantity:finalQuantity})
-            .then(res => console.log("this is update equip and it worked"))
-            .catch(err => console.log("error is " + err));
+                .then(res => console.log("this is update equip and it worked"))
+                .catch(err => console.log("error is " + err));
+
+            API.createRequest(requestInfo)
+                .then(res => this.setState(this.setState({
+                    equipment: "", 
+                    equipDesc:"",
+                    description: "",
+                    quantity: "",
+                    justification: ""
+                })))
+                .then(() => this.setState({isredirect:true}))
+                .catch(err => console.log("error is " + err));
         }else{
-            alert("That is too much to ask for");
+            alert("Please put in what is needed or ask manager to order more stuff");
         }
         
 
-        API.createRequest(requestInfo)
-            .then(res => this.setState(this.setState({
-                equipment: "", 
-                equipDesc:"",
-                description: "",
-                quantity: "",
-                justification: ""
-            })))
-            .then(() => this.setState({isredirect:true}))
-            .catch(err => console.log("error is " + err));
+        
 
     }
 
@@ -174,7 +179,9 @@ class CreateRequest extends Component {
                         <Title>Justification</Title>
                         <TextArea name="justification" placeholder="Justification" value={this.state.justification} onChange={this.handleInputChange}></TextArea>
                         <FormButton onClick={this.handleFormSubmit}>Submit Request</FormButton>
-
+                        <br />
+                        <br />
+                        <FormButton onClick={this.handleCancel}>Cancel</FormButton>
                     </form>
                     {this.state.isredirect? (<Redirect to={{pathname:"/user", state:this.state}}/>) : null}
                 </Container>

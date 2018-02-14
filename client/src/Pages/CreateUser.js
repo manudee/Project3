@@ -11,7 +11,7 @@ import Container from '../components/Container/Container';
 import API from '../utils/API';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-
+import { SaveBtn } from "../components/Button/SaveBtn.js";
 class CreateUser extends Component {
 
     state = {
@@ -54,10 +54,14 @@ class CreateUser extends Component {
      .catch(err => console.log("error is " + err));
 
     }*/
+
+    cancel = () =>{
+        this.setState({isredirect:true})
+    }
     handleFormSubmit = event => {
         // prevent default action. in this case, action is the form submission event
         event.preventDefault();
-
+        // this.setState({url:"userlist"});
         // create a string for an HTTP body message
         const username = encodeURIComponent(this.state.username);
         // const role = encodeURIComponent(this.state.role);
@@ -127,7 +131,11 @@ class CreateUser extends Component {
                         <Title>Role</Title>
                         <Input name="role" placeholder="Role" value={this.state.role} onChange={this.handleInputChange} />
                         <FormButton onClick={this.handleFormSubmit}>Submit Request</FormButton>
+                        <br />
+                        <br />
+                        <FormButton onClick={this.cancel}>Cancel</FormButton>
                     </form>
+
                     {this.state.isredirect ? (<Redirect to={{ pathname: "/userlist", state: this.state }} />) : null}
                 </Container>
             </div>

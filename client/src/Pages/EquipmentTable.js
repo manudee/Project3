@@ -10,7 +10,7 @@ import {Redirect} from 'react-router-dom';
 
 class EquipmentTable extends Component {
   state = {
-
+    id:'',
     equipments: [],
     isredirect: false
   }
@@ -24,25 +24,28 @@ class EquipmentTable extends Component {
   loadEquipments = () => {
     API.getEquipment()
       // .then(res=>console.log(res.data))
-      .then(response => this.setState({ equipments: response.data }))
+      .then(response =>{ 
+        console.log(response.data)
+        this.setState({ equipments: response.data })})
       .catch(err => console.log(err))
   }
 
 
 
+  backToManager =()=>{
+    console.log("In back");
+    this.setState({id:"manager"})
+    this.setState({ isredirect: true });
+  }
 
 
 
-
-  handleUpdate = event => {
-    event.preventDefault();
-    console.log("I AM In handleupdate");
-
-    var equipmentInfo = {};
-
-    equipmentInfo.equipmentDesc = this.state.equipmentDesc;
-    equipmentInfo.brand = this.state.brand;
-    equipmentInfo.quantity = this.state.quantity;
+  handleUpdate = id => {
+    
+    console.log("In handleUpdate");
+    this.setState({id:"equipments/"+id})
+    this.setState({ isredirect: true });
+    
 
 
 
@@ -50,17 +53,10 @@ class EquipmentTable extends Component {
   }
 
 
-  handleDelete = event => {
-    event.preventDefault();
-    console.log("I AM In handleDelete");
-
-    var equipmentInfo = {};
-
-    equipmentInfo.equipmentDesc = this.state.equipmentDesc;
-    equipmentInfo.brand = this.state.brand;
-    equipmentInfo.quantity = this.state.quantity;
-
-
+  handleDelete = id => {
+    API.deleteEquip(id)
+      .then(res => this.loadEquipments())
+      .catch(err => console.log(err));
 
   }
 
@@ -68,7 +64,7 @@ class EquipmentTable extends Component {
   handleCreateEquipment = event => {
     event.preventDefault();
     console.log("In handleCreate Equipment");
-
+    this.setState({id:"createequipment/"})
     this.setState({ isredirect: true });
   }
 
@@ -79,10 +75,7 @@ class EquipmentTable extends Component {
       <div>
         <div>
           <SaveBtn onClick={this.handleCreateEquipment} value='Create Equipment' />
-           {this.state.isredirect? (<Redirect to={{pathname:"/createequipment", state:this.state}}/>) : null}
         </div>
-
-
 
         <Container fluid className='card'>
 
@@ -105,7 +98,12 @@ class EquipmentTable extends Component {
 
           {this.state.equipments.length ? (
             <List>
-              {this.state.equipments.map(equipment => (
+              {this.state.equipments.map((equipment) => {
+                // console.log(equipment);
+                // {
+                //   this.setState({state})
+                // }
+                return (
                 <ListItem key={equipment._id}>
 
                   <Row className="card-block">
@@ -119,19 +117,28 @@ class EquipmentTable extends Component {
                       {equipment.quantity}
                     </Col>
                     <Col size="md-2">
-                      <SaveBtn onClick={this.handleUpdate} value='Update Equipment' />
+                      <SaveBtn onClick={()=>{this.handleUpdate(equipment._id)}} value="Update" />
+                  
                     </Col>
                     <Col size="md-2">
-                      <SaveBtn onClick={this.handleDelete} value='Delete Equipment' />
+                      <SaveBtn onClick={()=> this.handleDelete(equipment._id)} value='Delete Equipment' />
                     </Col>
                   </Row>
 
                 </ListItem>
-              ))}
+              )})
+            }
+            {this.state.isredirect? (<Redirect to={{pathname:"/"+this.state.id}}/>) : null}
+
+
             </List>
           ) : (
               <h3>No Equipments added yet</h3>
             )}
+          <br />
+        <div>
+          <SaveBtn onClick={this.backToManager} value='Back' />
+        </div>
 
 
         </Container>
