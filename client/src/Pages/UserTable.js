@@ -66,7 +66,7 @@ class UserTable extends Component {
               <h6>Quantity</h6>
             </Col>
             <Col size="md-2">
-              <h6>Justification</h6>
+              <h6>Status</h6>
             </Col>
           </Row>
 
@@ -77,7 +77,7 @@ class UserTable extends Component {
 
                   <Row className="card-block">
                     <Col size="md-2">
-                      <a href={"/api/user" + requests._id}>{requests._id}</a>
+                      <a href={"/user/" + requests._id}>{requests._id}</a>
                     </Col>
                     <Col size="md-2">
                       {requests.equipment}

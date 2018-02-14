@@ -31,7 +31,9 @@ export default {
     getRequests: function () {
         return axios.get("/api/createRequest");
     },
-
+    getDetail: function (id) {
+        return axios.get("/api/createuser/" + id);
+    },
 
     getEquipment:function(){
         console.log("I am in API")
@@ -47,9 +49,11 @@ export default {
             console.log(error.response)
         });
     },
-
     getUsers:function(){
         return axios.get('/api/createuser')
+    },
+    updateEquip:function(id,userInfo){
+        return axios.put('/api/createequipment/'+id,userInfo)
     }
 
 }

@@ -5,4 +5,8 @@ router.route("/")
   .get(equipmentController.findAll)
   .post(equipmentController.create)
 
+router.route("/:id")
+	.put(equipmentController.updateById)
+
+
 module.exports = router;
