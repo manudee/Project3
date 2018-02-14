@@ -15,7 +15,7 @@ const LoginForm = ({
 }) => (
 <div className="center-align">
   <Card className="container">
-    <form className="center-align" action="/" onSubmit={onSubmit}>
+    <form action="/" onSubmit={onSubmit}>
       <h2 className="card-heading">Login</h2>
 
       {successMessage && <p className="success-message">{successMessage}</p>}
