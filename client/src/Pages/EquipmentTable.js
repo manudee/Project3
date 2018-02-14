@@ -87,22 +87,20 @@ class EquipmentTable extends Component {
         <Container fluid className='card'>
 
           <Row className='card-header'>
-            <Col size="md-2">
-              <h6>Request Id </h6>
-            </Col>
-            <Col size="md-2">
-              <h6>Equipment</h6>
-            </Col>
-            <Col size="md-2">
-              <h6>Description</h6>
-            </Col>
-            <Col size="md-2">
-              <h6>Quantity</h6>
-            </Col>
-            <Col size="md-2">
-              <h6>Justification</h6>
-            </Col>
-          </Row>
+          
+           <Col size="md-3">
+             <h6>Equipment</h6>
+           </Col>
+           <Col size="md-3">
+             <h6>Brand</h6>
+           </Col>
+           <Col size="md-1">
+             <h6>Quantity</h6>
+           </Col>
+           <Col size="md-2">
+             <h6>Action</h6>
+           </Col>
+         </Row>
 
           {this.state.equipments.length ? (
             <List>
@@ -110,22 +108,13 @@ class EquipmentTable extends Component {
                 <ListItem key={equipment._id}>
 
                   <Row className="card-block">
-                    <Col size="md-2">
-
-                      <Link to={"/api/user" + equipment._id}>
-                        <strong>
-                          {equipment._id}
-                        </strong>
-                      </Link>
-
-                    </Col>
-                    <Col size="md-2">
+                    <Col size="md-3">
                       {equipment.equipmentDesc}
                     </Col>
-                    <Col size="md-2">
+                    <Col size="md-3">
                       {equipment.brand}
                     </Col>
-                    <Col size="md-2">
+                    <Col size="md-1">
                       {equipment.quantity}
                     </Col>
                     <Col size="md-2">
