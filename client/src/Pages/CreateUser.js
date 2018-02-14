@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Card, CardText } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
+import { CardText } from 'material-ui/Card';
+/*import RaisedButton from 'material-ui/RaisedButton';*/
+/*import TextField from 'material-ui/TextField';*/
 import { Input } from '../components/Form/Input.js';
 import { FormButton } from '../components/Form/FormButton.js';
 import Title from '../components/Title/Title.js';

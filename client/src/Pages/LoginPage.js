@@ -6,7 +6,7 @@ import Container from '../components/Container/Container';
 import PropTypes from 'prop-types';
 import Auth from '../modules/Auth';
 import LoginForm from '../components/Login/LoginForm.js';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+/*import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';*/
 import API from '../utils/API';
 
 class LoginPage extends Component {
@@ -128,14 +128,14 @@ class LoginPage extends Component {
                         successMessage={this.state.successMessage}
                         user={this.state.user}>Login</FormButton>
                 </Container> */}
-                <MuiThemeProvider >
+               {/* <MuiThemeProvider >*/}
                     <LoginForm
                         onSubmit={this.processForm}
                         onChange={this.changeUser}
                         errors={this.state.errors}
                         successMessage={this.state.successMessage}
                         user={this.state.user}
-                    /> </MuiThemeProvider>
+                    /> {/*</MuiThemeProvider>*/}
             </div>
         )
     }
