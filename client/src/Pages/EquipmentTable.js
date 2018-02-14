@@ -102,6 +102,7 @@ class EquipmentTable extends Component {
            </Col>
          </Row>
 
+
           {this.state.equipments.length ? (
             <List>
               {this.state.equipments.map(equipment => (

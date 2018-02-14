@@ -59,11 +59,31 @@ class ManagerTable extends Component {
         this.setState({ isredirectAllEquipments: true });
     }
 
-    handleRequestState = () =>{
 
+
+    updateRequest = (id,status) => {
+
+        var id=id;
+        var modifyRequest ={};
+        modifyRequest.status=status;
+        console.log(id)
+        console.log(status)
+        API.updateRequest(id,modifyRequest)
+            .then(res=>this.getRequests())
+            .catch(err => console.log(err));
     }
 
-
+    renderSwitch(status,id){
+        switch (status) {
+            case 0: return(<div><SaveBtn onClick={()=>this.updateRequest(id,1)} value='Approve' />
+            <SaveBtn onClick={()=>this.updateRequest(id,4)} value='Reject' /></div>);
+            case 1: return (<p>Checkout Approved</p>);
+            case 2:  return (<div><SaveBtn onClick={()=>this.updateRequest(id,3)}  value='Approve Return' /></div>);
+            case 3:  return (<p>Request Completed</p>);
+            case 4:  return (<p>Rejected</p>);
+            default:   return(<p>Nothing</p>)
+          }
+    }
 
     render() {
 
@@ -125,15 +145,7 @@ class ManagerTable extends Component {
                                         
                                           <Col size="md-2">
                                           
-                                          {(() => {
-        switch (managerDataValue.status) {
-          case "1": return (<p>Checkout Approved</p>);
-          case "2":  return (<div><SaveBtn value='Approve' /></div>);
-          case "3":  return (<p>Request Completed</p>);
-          case "4":  return (<p>Rejected</p>);
-          default:      return (<div> <SaveBtn value='Approve' /><SaveBtn value='Reject' /></div>);
-        }
-      })()}
+                                          {this.renderSwitch(managerDataValue.status,managerDataValue._id)}
                                               
                                            
                                         </Col>

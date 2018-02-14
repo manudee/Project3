@@ -39,6 +39,29 @@ class UserTable extends Component {
     this.setState({isredirect:true});
   }
 
+  updateRequest = (id,status) => {
+
+    var id=id;
+    var modifyRequest ={};
+    modifyRequest.status=status;
+    console.log(id)
+    console.log(status)
+    API.updateRequest(id,modifyRequest)
+        .then(res=>this.getRequests())
+        .catch(err => console.log(err));
+}
+
+renderSwitch(status,id){
+    switch (status) {
+      case 1: return (<div><SaveBtn onClick={()=>this.updateRequest(id,2)} value='Return' /></div>);
+      case 2:  return (<p>Pending Return Approval</p>);
+      case 3:  return (<p>Request Completed</p>);
+      case 4:  return (<p>Rejected</p>);
+      case 0:      return (<p>Pending Checkout Approval</p>);
+
+    }
+  }
+
 
   render() {
 
@@ -89,15 +112,7 @@ class UserTable extends Component {
                       {requests.quantity}
                     </Col>
                     <Col size="md-2">
-                    {(() => {
-        switch (requests.status) {
-          case "1": return (<div><SaveBtn value='Return' /></div>);
-          case "2":  return (<p>Pending Return Approval</p>);
-          case "3":  return (<p>Request Completed</p>);
-          case "4":  return (<p>Rejected</p>);
-          default:      return (<p>Pending Checkout Approval</p>);
-        }
-      })()}
+                    {this.renderSwitch(requests.status,requests._id)}
                     </Col>
                   </Row>
 
