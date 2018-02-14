@@ -39,6 +39,9 @@ export default {
     getDetail: function (id) {
         return axios.get("/api/createuser/" + id);
     },
+    equipDetail: function(id){
+        return axios.get("/api/createequipment/"+id);
+    },
 
     getEquipment:function(){
         return axios.get('/api/createequipment')
@@ -63,6 +66,10 @@ export default {
     updateRequest: function(id,status){
         console.log(status);
         return axios.post('/api/createRequest/'+id,status)
+    },
+    // Deletes the book with the given id
+    deleteEquip: function(id) {
+        return axios.delete("/api/createequipment/" + id);
     }
 
 }
