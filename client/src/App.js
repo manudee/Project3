@@ -9,7 +9,7 @@ import UserList from './Pages/UserList.js';
 import CreateEquipment from './Pages/CreateEquipment';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CreateUser from './Pages/CreateUser';
-
+import Detail from './Pages/Detail'
 
 
 const App = () =>
@@ -27,6 +27,7 @@ const App = () =>
         <Route path="/createuser" exact component={CreateUser} />
         <Route path="/createequipment" exact component={CreateEquipment} />
         <Route path="/manager" exact component={ManagerTable} />
+        <Route path="/user/:id"exact component={Detail} />
       </Switch>
       </div>
   </Router>    

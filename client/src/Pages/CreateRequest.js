@@ -16,17 +16,34 @@ class CreateRequest extends Component {
     state = {
         stock:[],
         equipment: "",
+        equipDesc:"",
+        equipId:"",
         description: "",
         quantity: "",
+        old_Quan:"",
         justification: "",
         isredirect: false
     }
 
     handleInputChange = event => {
         const { name, value } = event.target;
-        this.setState({
-            [name]: value
-        })
+        
+        if(name==='equipment'){
+            var temp = value.split('-');
+            // [value] = temp[0];
+            console.log(temp[2]);
+            this.setState({
+                equipDesc: temp[1],
+                [name]: temp[0],
+                old_Quan:temp[2],
+                equipId:temp[3]
+            })
+        }else{
+            this.setState({
+                [name]: value
+            })
+        }
+        // console.log(name)
     };
 
     setrequestType(event) {
@@ -44,7 +61,7 @@ class CreateRequest extends Component {
         API.getEquipment()
           // .then(res=>console.log(res.data))
           .then(response => {
-            
+                console.log(response.data)
                 this.setState({ stock: response.data })
 
             })
@@ -56,17 +73,31 @@ class CreateRequest extends Component {
 
         var requestInfo = {}
         requestInfo.equipment = this.state.equipment;
+        requestInfo.equipDesc = this.state.equipDesc;
         requestInfo.description = this.state.description;
-     
+        
         // requestInfo.equipmentStatus = false;
         requestInfo.quantity = this.state.quantity;
         requestInfo.justification = this.state.justification;
 
         console.log(requestInfo);
 
+        var finalQuantity = this.state.old_Quan -  this.state.quantity
+
+        console.log(finalQuantity);
+        if(finalQuantity>=0){
+            API.updateEquip(this.state.equipId,{quantity:finalQuantity})
+            .then(res => console.log("this is update equip and it worked"))
+            .catch(err => console.log("error is " + err));
+        }else{
+            alert("That is too much to ask for");
+        }
+        
+
         API.createRequest(requestInfo)
             .then(res => this.setState(this.setState({
                 equipment: "", 
+                equipDesc:"",
                 description: "",
                 quantity: "",
                 justification: ""
@@ -128,12 +159,14 @@ class CreateRequest extends Component {
                                 <option >Please pick from one of the following</option>
                             {
                                 this.state.stock.map(equip =>(
-                                        <option value = {equip.equipmentDesc}>{equip.equipmentDesc+'-'+equip.brand}</option>
+                                        <option value = {equip.equipmentDesc+'-'+equip.brand +'-'+equip.quantity+'-'+equip._id}>{equip.equipmentDesc+'-'+equip.brand}</option>
                                     )
                                 )
                             }
                             </select>
                         </div>
+                        <Title>Equipement Description</Title>
+                        <Input disabled name="equipdesc" placeholder="Equipment Description" value={this.state.equipDesc} />
                         <Title>Description</Title>
                         <Input name="description" placeholder="Description" value={this.state.description} onChange={this.handleInputChange} />
                         <Title>Quantity</Title>

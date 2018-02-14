@@ -6,6 +6,8 @@ const validator = require('validator');
 router.route("/")
   .get(usersController.findAll)
   .post(usersController.create)
+router.route("/:id")
+	.get(usersController.findById)
 
 router.post('/login', (req, res, next) => {
 
@@ -150,8 +152,6 @@ router.post('/signup', (req, res, next) => {
     });
   })(req, res, next);
 });
-
-
 
 
 module.exports = router;

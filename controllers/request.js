@@ -14,7 +14,12 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-
+  findById: function(req, res) {
+    db.request
+      .findById(req.params.id)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   updateRequest : function(req,res){
     console.log("I am in request controller.")
     console.log(req.params.id);
@@ -28,9 +33,6 @@ module.exports = {
   //     .then(dbModel => res.json(dbModel))
   //     .catch(err => res.status(422).json(err));
    }
-  
-
-
 }
 
 

@@ -8,7 +8,10 @@ var requestSchema = new Schema({
         type: String,
         required: true
     },
-    
+    equipDesc: {
+        type: String,
+        required: true
+    },
     description: {
         type: String,
         required: true
