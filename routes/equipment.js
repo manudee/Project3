@@ -7,6 +7,8 @@ router.route("/")
 
 router.route("/:id")
 	.put(equipmentController.updateById)
+	.get(equipmentController.findOne)
+	.delete(equipmentController.delete)
 
 
 module.exports = router;

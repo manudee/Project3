@@ -11,11 +11,16 @@ class UserList extends Component {
 
 
     state = {
-
-        users: []
-
+        users: [],
+        isredirect: false
     }
 
+    backToManager =()=>{
+        console.log("In back");
+        
+        this.setState({ isredirect: true });
+        console.log(this.state.isredirect)
+      }
 
     componentDidMount() {
         this.loadUsers();
@@ -40,9 +45,6 @@ class UserList extends Component {
 
         return (
             <div>
-                <div>
-                    <SaveBtn value='Create User' />
-                </div>
                 <Container fluid className='card'>
 
                     <Row className='card-header'>
@@ -81,10 +83,15 @@ class UserList extends Component {
                     ) : (
                             <h3>No Users yet</h3>
                         )}
-
-
+                    <br />
+                      <div>
+          <SaveBtn onClick={this.backToManager} value='Back' />
+        </div> 
+{this.state.isredirect? (<Redirect to={{pathname:"/manager"}}/>) : null}
                 </Container>
+
             </div>)
+        
     }
 
 
