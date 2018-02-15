@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
+const path = require("path");
 const PORT = process.env.PORT || 3001;
 var db = require('./models');
 
@@ -14,6 +15,9 @@ const passport = require('passport');
 // var server = http.createServer(app);
 // const io = socket(server);
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 var request = require('request');
 
@@ -47,8 +51,11 @@ mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/project3"
 );
 
-
+//let's try this again
 // connect to the database and load models
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 
 // Start the API server
 // server.listen(PORT, function () {
